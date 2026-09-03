@@ -192,9 +192,9 @@ export const portfolioData = {
   achievements: [],
   contact: {
     email: "vishaldhar1106@gmail.com",
-    emailjsServiceId: "service_0dxz2w8", // User must insert their EmailJS Service ID
-    emailjsTemplateId: "template_ht610wd", // User must insert their EmailJS Template ID
-    emailjsPublicKey: "yKQOPDAtJZln_El0j", // User must insert their EmailJS Public Key
+    emailjsServiceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || "",
+    emailjsTemplateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "",
+    emailjsPublicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "",
     linkedin: "https://www.linkedin.com/in/vishal-dharsan-p-s",
     github: "https://github.com/Vishal-0639",
     location: "Tamil Nadu, India"
