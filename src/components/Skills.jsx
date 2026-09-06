@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
 import { portfolioData } from '../portfolioData';
 
@@ -15,26 +16,45 @@ const Skills = () => {
 
   return (
     <section id="skills">
-      <div className="section-title-container">
+      <motion.div 
+        className="section-title-container"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6 }}
+      >
         <span className="section-subtitle">SKILLS SUMMARY</span>
         <h2>TECHNOLOGIES</h2>
-      </div>
+      </motion.div>
 
       <div className="skills-grid">
         {skillCategories.map((category, catIndex) => (
-          <div key={catIndex} className="skills-category">
+          <motion.div 
+            key={catIndex} 
+            className="skills-category"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.1 * catIndex, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -6, transition: { duration: 0.2 } }}
+          >
             <h3 className="skills-category-title">{category.category}</h3>
             <div className="skills-list">
               {category.items.map((skill, skillIndex) => (
-                <div key={skillIndex} className="skill-item">
+                <motion.div 
+                  key={skillIndex} 
+                  className="skill-item"
+                  whileHover={{ scale: 1.05, borderColor: '#ef4444' }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <span className="skill-icon-wrapper">
                     <DynamicIcon name={skill.icon} />
                   </span>
                   <span>{skill.name}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

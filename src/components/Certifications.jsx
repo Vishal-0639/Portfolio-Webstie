@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Award, ExternalLink } from 'lucide-react';
 import { portfolioData } from '../portfolioData';
 
@@ -7,10 +8,16 @@ const Certifications = () => {
 
   return (
     <section id="certifications">
-      <div className="section-title-container">
+      <motion.div 
+        className="section-title-container"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6 }}
+      >
         <span className="section-subtitle">Verified achievements</span>
         <h2>Certifications</h2>
-      </div>
+      </motion.div>
 
       <div className="certs-grid">
         {certList.map((cert, index) => {
@@ -33,23 +40,38 @@ const Certifications = () => {
 
           if (cert.url) {
             return (
-              <a
+              <motion.a
                 key={index}
                 href={cert.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cert-card"
                 title={`View ${cert.title} certificate`}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, delay: (index % 6) * 0.08 }}
+                whileHover={{ y: -6, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {CardContent}
-              </a>
+              </motion.a>
             );
           }
 
           return (
-            <div key={index} className="cert-card" style={{ cursor: 'default' }}>
+            <motion.div 
+              key={index} 
+              className="cert-card" 
+              style={{ cursor: 'default' }}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: (index % 6) * 0.08 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+            >
               {CardContent}
-            </div>
+            </motion.div>
           );
         })}
       </div>

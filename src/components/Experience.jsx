@@ -1,5 +1,6 @@
 import React from 'react';
-import { Briefcase, Calendar, Building2, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Briefcase, Calendar, Building2 } from 'lucide-react';
 import { portfolioData } from '../portfolioData';
 
 const Experience = () => {
@@ -7,15 +8,29 @@ const Experience = () => {
 
   return (
     <section id="experience" className="experience-section">
-      <div className="section-title-container">
+      <motion.div 
+        className="section-title-container"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6 }}
+      >
         <span className="section-subtitle">WORK EXPERIENCE</span>
         <h2>INTERNSHIPS</h2>
-      </div>
+      </motion.div>
 
       <div className="experience-container">
         <div className="experience-cards-grid">
           {experience.map((item, index) => (
-            <div key={index} className="experience-card">
+            <motion.div 
+              key={index} 
+              className="experience-card"
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6, transition: { duration: 0.2 } }}
+            >
               <div className="experience-card-header">
                 <div className="experience-role-group">
                   <div className="experience-icon-badge">
@@ -45,7 +60,7 @@ const Experience = () => {
                 <span className="experience-tag">REST APIs</span>
                 <span className="experience-tag">Git & Collaboration</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

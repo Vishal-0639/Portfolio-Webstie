@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Mail, MapPin, Linkedin, Instagram, Send, CheckCircle2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { portfolioData } from '../portfolioData';
@@ -24,7 +25,6 @@ const Contact = () => {
       ...formData,
       [name]: value
     });
-    // Clear errors when typing
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -53,9 +53,8 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    // If EmailJS credentials are not configured, simulate success and warn in console
     if (!emailjsServiceId || !emailjsTemplateId || !emailjsPublicKey) {
-      console.warn("EmailJS credentials are not set in src/portfolioData.js. Simulating success state.");
+      console.warn("EmailJS credentials are not set in .env. Simulating success state.");
       
       setTimeout(() => {
         setIsSuccess(true);
@@ -91,7 +90,7 @@ const Contact = () => {
       })
       .catch((err) => {
         console.error('EmailJS Error:', err);
-        alert("Failed to deliver message via EmailJS. Please verify Service IDs, Template keys, and Public Keys in src/portfolioData.js.");
+        alert("Failed to deliver message via EmailJS. Please verify Service IDs, Template keys, and Public Keys.");
       })
       .finally(() => {
         setIsSubmitting(false);
@@ -100,13 +99,25 @@ const Contact = () => {
 
   return (
     <section id="contact">
-      <div className="section-title-container">
+      <motion.div 
+        className="section-title-container"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6 }}
+      >
         <span className="section-subtitle">GET IN TOUCH</span>
         <h2>CONTACT ME</h2>
-      </div>
+      </motion.div>
 
       <div className="contact-grid">
-        <div className="contact-info">
+        <motion.div 
+          className="contact-info"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div>
             <h3 className="contact-info-title">Let's Connect</h3>
             <p className="contact-info-text">
@@ -165,12 +176,22 @@ const Contact = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Contact Form Container */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           {isSuccess ? (
-            <div className="contact-form form-success-state">
+            <motion.div 
+              className="contact-form form-success-state"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
               <div className="form-success-icon-wrapper">
                 <CheckCircle2 size={36} />
               </div>
@@ -178,10 +199,16 @@ const Contact = () => {
               <p className="form-success-text" style={{ color: 'var(--text-main)' }}>
                 Thank you for reaching out. Your message has been sent successfully. I'll get back to you as soon as possible.
               </p>
-              <button onClick={() => setIsSuccess(false)} className="btn btn-secondary" style={{ marginTop: '1rem' }}>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsSuccess(false)} 
+                className="btn btn-secondary" 
+                style={{ marginTop: '1rem' }}
+              >
                 Send Another Message
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="contact-form" noValidate>
               <div className="form-row">
@@ -243,7 +270,9 @@ const Contact = () => {
                 {errors.message && <span style={{ color: '#ef4444', fontSize: '0.8rem' }}>{errors.message}</span>}
               </div>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
                 className="btn btn-primary form-submit-btn"
@@ -256,10 +285,10 @@ const Contact = () => {
                     <Send size={16} />
                   </>
                 )}
-              </button>
+              </motion.button>
             </form>
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

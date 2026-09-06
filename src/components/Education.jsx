@@ -1,5 +1,6 @@
 import React from 'react';
-import { Calendar, GraduationCap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Calendar } from 'lucide-react';
 import { portfolioData } from '../portfolioData';
 
 const Education = () => {
@@ -8,14 +9,26 @@ const Education = () => {
 
   return (
     <section id="education">
-      <div className="section-title-container">
+      <motion.div 
+        className="section-title-container"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6 }}
+      >
         <span className="section-subtitle">ACADEMIC BACKGROUND</span>
         <h2>EDUCATION</h2>
-      </div>
+      </motion.div>
 
       <div className="qual-scene-grid">
         {/* Left Column: Portrait image overlaid on red circular backdrop */}
-        <div className="qual-image-badge-wrapper">
+        <motion.div 
+          className="qual-image-badge-wrapper"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="qual-circle-red-bg"></div>
           <img
             src={profileImg}
@@ -26,15 +39,25 @@ const Education = () => {
               e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop';
             }}
           />
-        </div>
+        </motion.div>
 
         {/* Right Column: Direct Studies Timeline */}
         <div>
           <div className="education-timeline">
             {education.map((item, index) => (
-              <div key={index} className="timeline-item">
+              <motion.div 
+                key={index} 
+                className="timeline-item"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <div className="timeline-dot"></div>
-                <div className="timeline-content">
+                <motion.div 
+                  className="timeline-content"
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                >
                   <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
                     <h3 className="timeline-degree">{item.degree}</h3>
                     <span className="timeline-period">
@@ -45,8 +68,8 @@ const Education = () => {
                   <div className="timeline-institution">{item.institution}</div>
                   <div className="timeline-status">{item.status}</div>
                   {item.details && <p className="timeline-details">{item.details}</p>}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             ))}
           </div>
         </div>

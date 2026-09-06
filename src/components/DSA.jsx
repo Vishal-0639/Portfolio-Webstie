@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Code, ExternalLink, Sparkles } from 'lucide-react';
 import { portfolioData } from '../portfolioData';
 
 const DSA = () => {
   const { leetcode } = portfolioData.socialLinks;
   
-  // Set default verified stats (152 Solved, 74 Easy, 70 Medium, 8 Hard) as fallback state
   const [stats, setStats] = useState({
     solvedProblem: 152,
     easySolved: 74,
@@ -15,7 +15,6 @@ const DSA = () => {
   const [isSyncing, setIsSyncing] = useState(true);
 
   useEffect(() => {
-    // Fetch live statistics in the background using the Vercel LeetCode proxy
     fetch('https://leetcode-api-pied.vercel.app/user/Vizz76')
       .then((res) => {
         if (!res.ok) throw new Error('API server response failed');
@@ -46,25 +45,43 @@ const DSA = () => {
 
   return (
     <section id="dsa">
-      <div className="section-title-container">
+      <motion.div 
+        className="section-title-container"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6 }}
+      >
         <span className="section-subtitle">DATA STRUCTURES & ALGORITHMS</span>
         <h2>PROBLEM SOLVING</h2>
-      </div>
+      </motion.div>
 
       <div className="dsa-container">
         {/* Customized Problem Solving Statement */}
-        <div className="dsa-statement-box">
+        <motion.div 
+          className="dsa-statement-box"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="dsa-statement-icon">
             <Sparkles size={18} />
           </div>
           <p className="dsa-statement-text">
             I regularly practice data structures and algorithms to strengthen my problem-solving skills and write efficient, scalable solutions.
           </p>
-        </div>
+        </motion.div>
 
         {/* Live LeetCode Stats Card */}
         {leetcode && (
-          <div className="dsa-leetcode-box">
+          <motion.div 
+            className="dsa-leetcode-box"
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className="dsa-leetcode-header">
               <div className="dsa-leetcode-title-wrapper">
                 <Code size={20} className="dsa-leetcode-icon" />
@@ -78,9 +95,14 @@ const DSA = () => {
 
             <div className="dsa-leetcode-stats-display">
               <div className="leetcode-stat-circle-group">
-                <div className="leetcode-main-solved-value">
+                <motion.div 
+                  className="leetcode-main-solved-value"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
                   {stats.solvedProblem}
-                </div>
+                </motion.div>
                 <div className="leetcode-main-solved-label">SOLVED</div>
               </div>
 
@@ -91,10 +113,13 @@ const DSA = () => {
                     <span className="difficulty-count">{stats.easySolved}</span>
                   </div>
                   <div className="leetcode-track">
-                    <div 
+                    <motion.div 
                       className="leetcode-bar easy-bar" 
-                      style={{ width: `${Math.min(100, (stats.easySolved / 250) * 100)}%` }}
-                    ></div>
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${Math.min(100, (stats.easySolved / 250) * 100)}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    />
                   </div>
                 </div>
 
@@ -104,10 +129,13 @@ const DSA = () => {
                     <span className="difficulty-count">{stats.mediumSolved}</span>
                   </div>
                   <div className="leetcode-track">
-                    <div 
+                    <motion.div 
                       className="leetcode-bar medium-bar" 
-                      style={{ width: `${Math.min(100, (stats.mediumSolved / 200) * 100)}%` }}
-                    ></div>
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${Math.min(100, (stats.mediumSolved / 200) * 100)}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                    />
                   </div>
                 </div>
 
@@ -117,17 +145,22 @@ const DSA = () => {
                     <span className="difficulty-count">{stats.hardSolved}</span>
                   </div>
                   <div className="leetcode-track">
-                    <div 
+                    <motion.div 
                       className="leetcode-bar hard-bar" 
-                      style={{ width: `${Math.min(100, (stats.hardSolved / 50) * 100)}%` }}
-                    ></div>
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${Math.min(100, (stats.hardSolved / 50) * 100)}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+                    />
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="dsa-leetcode-action-row" style={{ marginTop: '1.5rem' }}>
-              <a
+              <motion.a
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 href={leetcode}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -137,9 +170,9 @@ const DSA = () => {
               >
                 LeetCode Profile
                 <ExternalLink size={16} />
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

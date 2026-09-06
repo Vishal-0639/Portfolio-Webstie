@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Download, BookOpen, GraduationCap, Calendar, Award } from 'lucide-react';
 import { portfolioData } from '../portfolioData';
 
@@ -8,14 +9,26 @@ const About = () => {
 
   return (
     <section id="about">
-      <div className="section-title-container">
+      <motion.div 
+        className="section-title-container"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6 }}
+      >
         <span className="section-subtitle">CREATIVE PORTFOLIO</span>
         <h2>ABOUT ME</h2>
-      </div>
+      </motion.div>
 
       <div className="about-grid">
         {/* Left Column: Big uppercase title and bio text */}
-        <div className="about-title-block">
+        <motion.div 
+          className="about-title-block"
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           <h1 className="about-huge-header">
             HELLO, I'M <br />
             {name}
@@ -25,10 +38,16 @@ const About = () => {
               <p key={index}>{paragraph}</p>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Column: Portrait image overlaid on red circular backdrop */}
-        <div className="about-image-badge-wrapper">
+        <motion.div 
+          className="about-image-badge-wrapper"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="about-circle-red-bg"></div>
           <img
             src={profileImg}
@@ -39,46 +58,49 @@ const About = () => {
               e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop';
             }}
           />
-        </div>
+        </motion.div>
 
-        {/* Bottom Row: Stats Cards */}
+        {/* Bottom Row: Stats Cards with Staggered Entrance */}
         <div className="about-stats">
-          <div className="stat-card">
-            <div className="stat-label">
-              <BookOpen size={14} style={{ marginRight: '6px' }} />
-              UNIVERSITY
-            </div>
-            <div className="stat-value">{stats.university}</div>
-          </div>
-
-          <div className="stat-card">
-            <div className="stat-label">
-              <GraduationCap size={14} style={{ marginRight: '6px' }} />
-              DEGREE
-            </div>
-            <div className="stat-value">{stats.degree}</div>
-          </div>
-
-          <div className="stat-card">
-            <div className="stat-label">
-              <Calendar size={14} style={{ marginRight: '6px' }} />
-              YEAR
-            </div>
-            <div className="stat-value">{stats.year}</div>
-          </div>
-
-          <div className="stat-card">
-            <div className="stat-label">
-              <Award size={14} style={{ marginRight: '6px' }} />
-              CGPA
-            </div>
-            <div className="stat-value">{stats.cgpa}</div>
-          </div>
+          {[
+            { icon: BookOpen, label: 'UNIVERSITY', value: stats.university },
+            { icon: GraduationCap, label: 'DEGREE', value: stats.degree },
+            { icon: Calendar, label: 'YEAR', value: stats.year },
+            { icon: Award, label: 'CGPA', value: stats.cgpa },
+          ].map((stat, idx) => {
+            const Icon = stat.icon;
+            return (
+              <motion.div 
+                key={stat.label}
+                className="stat-card"
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, delay: 0.1 * idx }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <div className="stat-label">
+                  <Icon size={14} style={{ marginRight: '6px' }} />
+                  {stat.label}
+                </div>
+                <div className="stat-value">{stat.value}</div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
-      <div className="about-cta" style={{ marginTop: '2.5rem', textAlign: 'left' }}>
-        <a
+      <motion.div 
+        className="about-cta" 
+        style={{ marginTop: '2.5rem', textAlign: 'left' }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        <motion.a
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.96 }}
           href={resumeUrl}
           download="Vishal_Dharsan_Resume.pdf"
           className="btn btn-primary"
@@ -86,8 +108,8 @@ const About = () => {
         >
           <Download size={16} />
           DOWNLOAD RESUME
-        </a>
-      </div>
+        </motion.a>
+      </motion.div>
     </section>
   );
 };

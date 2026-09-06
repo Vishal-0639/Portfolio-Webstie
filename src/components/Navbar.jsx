@@ -47,9 +47,8 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <a href="#home" className="nav-logo" onClick={(e) => handleNavClick(e, 'home')}>
+      <a href="#home" className="nav-logo" onClick={(e) => handleNavClick(e, 'home')} aria-label="Home">
         <img src="/logo.png" alt="VD Logo" className="nav-logo-img" />
-        <span>Vizz.</span>
       </a>
 
       {/* Navigation Links */}
