@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUpRight, Sparkles, Code2 } from 'lucide-react';
 import { portfolioData } from '../portfolioData';
 
 const Hero = () => {
-  const { name, role, bio, profileImg } = portfolioData.personalInfo;
+  const { name, profileImg } = portfolioData.personalInfo;
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -22,107 +23,126 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="hero-section">
-      {/* Giant Overlay Container */}
-      <motion.div 
-        className="hero-giant-word-container"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      >
+    <section id="home" className="hero-split-section">
+      <div className="hero-split-container">
+        {/* Left Column: Text & CTAs */}
         <motion.div 
-          className="hero-giant-word-bg"
-          initial={{ letterSpacing: '8px', opacity: 0 }}
-          animate={{ letterSpacing: '4px', opacity: 1 }}
-          transition={{ duration: 1.1, ease: 'easeOut' }}
+          className="hero-left-column"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          PORTFOLIO
+          {/* Index Tracker Badge */}
+          <div className="hero-tracker-badge">
+            <span className="tracker-line"></span>
+            <span className="tracker-text">01 • SOFTWARE DEVELOPER & CSE</span>
+          </div>
+
+          {/* Large 2-Line Editorial Name */}
+          <h1 className="hero-editorial-title">
+            <motion.span 
+              className="title-line"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Vishal
+            </motion.span>
+            <motion.span 
+              className="title-line accent-dot"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Dharsan<span>.</span>
+            </motion.span>
+          </h1>
+
+          {/* Tech Tagline */}
+          <motion.div 
+            className="hero-tech-tagline"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.45 }}
+          >
+            <span className="tech-badge-pill">
+              <Code2 size={13} style={{ display: 'inline', marginRight: '5px', verticalAlign: 'middle', color: '#ef4444' }} />
+              JAVA &bull; SPRING BOOT &bull; REACT &bull; DSA
+            </span>
+          </motion.div>
+
+          {/* Bio Description */}
+          <motion.p 
+            className="hero-editorial-bio"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.55 }}
+          >
+            I build <strong>scalable backend systems</strong> and high-performance web applications. Pre-final-year CSE student at <strong>SKCET, Coimbatore</strong> with hands-on experience in full-stack development and algorithmic problem solving. Open to internships and impactful software engineering opportunities.
+          </motion.p>
+
+          {/* Action Buttons */}
+          <motion.div 
+            className="hero-buttons-group"
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.65 }}
+          >
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => scrollToSection('projects')}
+              className="btn btn-hero-primary"
+              title="Explore Featured Projects"
+            >
+              VIEW WORK
+              <ArrowUpRight size={16} />
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => scrollToSection('contact')}
+              className="btn btn-hero-ghost"
+              title="Get in touch"
+            >
+              CONTACT
+            </motion.button>
+          </motion.div>
         </motion.div>
-        
-        {/* Layered Portrait Card with Spring Motion */}
+
+        {/* Right Column: Large High-Contrast Portrait */}
         <motion.div 
-          className="hero-overlay-portrait-wrapper"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, type: 'spring', stiffness: 90, damping: 15 }}
-          whileHover={{ scale: 1.03 }}
+          className="hero-right-column"
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="hero-badge-red-card">
+          <div className="hero-portrait-container">
+            <div className="hero-portrait-vignette"></div>
             <img
               src={profileImg}
               alt={name}
-              className="hero-badge-img"
+              className="hero-editorial-img"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop';
+                e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop';
               }}
             />
+            {/* Subtle floating badge */}
+            <motion.div 
+              className="hero-floating-badge"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.8 }}
+              whileHover={{ scale: 1.06 }}
+            >
+              <span className="live-pulse-dot"></span>
+              <span>Available for Hire &bull; 2026</span>
+            </motion.div>
           </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Layout Content Row with Staggered Fade In */}
-      <div className="hero-content-details">
-        {/* Left Side: Name and Role Description */}
-        <motion.div 
-          className="hero-desc-block"
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="hero-name-label">{name}</span>
-          <span className="hero-role-label">{role}</span>
-          <p className="hero-paragraph">{bio}</p>
-        </motion.div>
-
-        {/* Right Side: START & END Menu panel */}
-        <motion.div 
-          className="hero-game-menu"
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <motion.button 
-            whileHover={{ scale: 1.08, x: -4 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection('about')} 
-            className="menu-item-btn"
-            title="START JOURNEY"
-          >
-            START
-          </motion.button>
-          <motion.button 
-            whileHover={{ scale: 1.08, x: -4 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection('contact')} 
-            className="menu-item-btn"
-            title="GO TO END / CONTACT"
-          >
-            END
-          </motion.button>
         </motion.div>
       </div>
-
-      {/* Scroll mouse indicator */}
-      <motion.div 
-        className="hero-scroll"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.8 }}
-      >
-        <a 
-          href="#about" 
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection('about');
-          }}
-          aria-label="Scroll to About section"
-        >
-          <div className="mouse">
-            <div className="wheel"></div>
-          </div>
-        </a>
-      </motion.div>
     </section>
   );
 };

@@ -116,6 +116,14 @@ const Navbar = () => {
           <Linkedin size={18} />
         </a>
 
+        <a
+          href="#contact"
+          onClick={(e) => handleNavClick(e, 'contact')}
+          className="btn-nav-hire"
+        >
+          HIRE ME
+        </a>
+
         {/* Mobile Menu Icon */}
         <button
           className="mobile-menu-toggle"

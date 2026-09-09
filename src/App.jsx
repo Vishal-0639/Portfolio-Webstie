@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -14,12 +16,14 @@ import CustomCursor from './components/CustomCursor';
 import './App.css';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   // Intersection Observer scroll trigger to set scene active classes
   useEffect(() => {
     const sections = document.querySelectorAll('section');
     const observerOptions = {
       root: null,
-      threshold: 0.1, // trigger early
+      threshold: 0.1,
       rootMargin: "0px 0px -10% 0px"
     };
 
@@ -40,6 +44,11 @@ function App() {
 
   return (
     <div className="page-wrapper">
+      {/* Welcome Preloader Screen */}
+      <AnimatePresence mode="wait">
+        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
       <CustomCursor />
       <Navbar />
       <main style={{ display: 'flex', flexDirection: 'column', gap: '8rem', paddingBottom: '4rem' }}>
