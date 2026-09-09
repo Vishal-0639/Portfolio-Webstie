@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Sparkles, Code2 } from 'lucide-react';
+import { ArrowDown, ArrowRight, Sparkles } from 'lucide-react';
 import { portfolioData } from '../portfolioData';
 
 const Hero = () => {
@@ -23,122 +23,111 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="hero-split-section">
-      <div className="hero-split-container">
-        {/* Left Column: Text & CTAs */}
+    <section id="home" className="hero-immersive-section">
+      {/* Ambient Large VD Logo Watermark in Background */}
+      <div className="hero-ambient-watermark">
+        <img src="/logo.png" alt="" className="hero-watermark-img" aria-hidden="true" />
+      </div>
+
+      <div className="hero-immersive-container">
+        {/* Left/Main Column: Impactful Statement & Bio */}
         <motion.div 
-          className="hero-left-column"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
+          className="hero-main-content"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Index Tracker Badge */}
-          <div className="hero-tracker-badge">
-            <span className="tracker-line"></span>
-            <span className="tracker-text">01 • SOFTWARE DEVELOPER & CSE</span>
-          </div>
-
-          {/* Large 2-Line Editorial Name */}
-          <h1 className="hero-editorial-title">
-            <motion.span 
-              className="title-line"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Vishal
-            </motion.span>
-            <motion.span 
-              className="title-line accent-dot"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Dharsan<span>.</span>
-            </motion.span>
-          </h1>
-
-          {/* Tech Tagline */}
+          {/* Availability Status Badge */}
           <motion.div 
-            className="hero-tech-tagline"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.45 }}
+            className="hero-status-pill"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <span className="tech-badge-pill">
-              <Code2 size={13} style={{ display: 'inline', marginRight: '5px', verticalAlign: 'middle', color: '#ef4444' }} />
-              JAVA &bull; SPRING BOOT &bull; REACT &bull; DSA
-            </span>
+            <span className="status-indicator-dot"></span>
+            <span className="status-text">AVAILABLE FOR FULL-STACK & BACKEND ROLES</span>
           </motion.div>
 
-          {/* Bio Description */}
-          <motion.p 
-            className="hero-editorial-bio"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.55 }}
-          >
-            I build <strong>scalable backend systems</strong> and high-performance web applications. Pre-final-year CSE student at <strong>SKCET, Coimbatore</strong> with hands-on experience in full-stack development and algorithmic problem solving. Open to internships and impactful software engineering opportunities.
-          </motion.p>
-
-          {/* Action Buttons */}
-          <motion.div 
-            className="hero-buttons-group"
+          {/* Large Hero Headline */}
+          <motion.h1 
+            className="hero-statement-title"
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.65 }}
+            transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.96 }}
-              onClick={() => scrollToSection('projects')}
-              className="btn btn-hero-primary"
-              title="Explore Featured Projects"
-            >
-              VIEW WORK
-              <ArrowUpRight size={16} />
-            </motion.button>
+            Building backend systems that scale <span className="title-italic-accent">under real-world pressure.</span>
+          </motion.h1>
 
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.96 }}
+          {/* Subtitle Bio */}
+          <motion.p 
+            className="hero-statement-desc"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Pre-final-year Computer Science student at <strong>SKCET, Coimbatore</strong>. Specializing in <strong>Java, Spring Boot, React, and MySQL</strong>. I focus on clean API design, high-concurrency architecture, and algorithmic problem-solving.
+          </motion.p>
+
+          {/* Action Links */}
+          <motion.div 
+            className="hero-action-links"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55 }}
+          >
+            <button
+              onClick={() => scrollToSection('projects')}
+              className="hero-link-primary"
+              title="Explore featured projects"
+            >
+              <span>See selected work</span>
+              <ArrowDown size={15} />
+            </button>
+
+            <button
               onClick={() => scrollToSection('contact')}
-              className="btn btn-hero-ghost"
+              className="hero-link-secondary"
               title="Get in touch"
             >
-              CONTACT
-            </motion.button>
+              <span>Let's talk</span>
+              <ArrowRight size={15} />
+            </button>
           </motion.div>
         </motion.div>
 
-        {/* Right Column: Large High-Contrast Portrait */}
+        {/* Right Column: Large High-Resolution Portrait with Floating Badge */}
         <motion.div 
-          className="hero-right-column"
+          className="hero-image-column"
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="hero-portrait-container">
-            <div className="hero-portrait-vignette"></div>
+          <div className="hero-portrait-frame">
+            <div className="hero-portrait-gradient-overlay"></div>
             <img
               src={profileImg}
               alt={name}
-              className="hero-editorial-img"
+              className="hero-main-photo"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop';
               }}
             />
-            {/* Subtle floating badge */}
+            {/* Floating Live Metric Card */}
             <motion.div 
-              className="hero-floating-badge"
+              className="hero-live-metric-card"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.8 }}
-              whileHover={{ scale: 1.06 }}
+              transition={{ delay: 0.9, duration: 0.6 }}
+              whileHover={{ scale: 1.05 }}
             >
-              <span className="live-pulse-dot"></span>
-              <span>Available for Hire &bull; 2026</span>
+              <div className="metric-icon-badge">
+                <Sparkles size={16} />
+              </div>
+              <div className="metric-details">
+                <span className="metric-number">150+ Solved</span>
+                <span className="metric-label">LeetCode &bull; DSA Mastery</span>
+              </div>
             </motion.div>
           </div>
         </motion.div>

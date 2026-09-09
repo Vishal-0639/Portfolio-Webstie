@@ -5,7 +5,6 @@ const Preloader = ({ onComplete }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // Smoothly increment counter from 0 to 100 over ~1.6 seconds
     const interval = setInterval(() => {
       setCount((prev) => {
         if (prev >= 100) {
@@ -15,11 +14,10 @@ const Preloader = ({ onComplete }) => {
           }, 350);
           return 100;
         }
-        // Accelerating curve
-        const step = Math.max(1, Math.floor((100 - prev) / 8) + 2);
+        const step = Math.max(1, Math.floor((100 - prev) / 7) + 2);
         return Math.min(100, prev + step);
       });
-    }, 35);
+    }, 30);
 
     return () => clearInterval(interval);
   }, [onComplete]);
@@ -30,16 +28,27 @@ const Preloader = ({ onComplete }) => {
       initial={{ y: 0 }}
       exit={{ 
         y: '-100%', 
-        transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] } 
+        transition: { duration: 0.95, ease: [0.76, 0, 0.24, 1] } 
       }}
     >
       <div className="preloader-content">
+        {/* Animated VD Logo in Center */}
+        <motion.div
+          className="preloader-logo-wrapper"
+          initial={{ scale: 0.7, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <img src="/logo.png" alt="VD Logo" className="preloader-logo-img" />
+          <div className="preloader-logo-glow"></div>
+        </motion.div>
+
         {/* Welcome Tag */}
         <motion.span
           className="preloader-welcome-tag"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
         >
           WELCOME TO MY PORTFOLIO
         </motion.span>
@@ -47,9 +56,9 @@ const Preloader = ({ onComplete }) => {
         {/* Large Editorial Name */}
         <motion.h1
           className="preloader-title"
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
         >
           Vishal Dharsan
         </motion.h1>
@@ -65,7 +74,7 @@ const Preloader = ({ onComplete }) => {
         {/* Live Percentage Counter & Status */}
         <div className="preloader-footer">
           <span className="preloader-counter">{count}%</span>
-          <span className="preloader-status">INITIALIZING EXPERIENCE</span>
+          <span className="preloader-status">ENGINEERING SYSTEM EXPERIENCE</span>
         </div>
       </div>
     </motion.div>
