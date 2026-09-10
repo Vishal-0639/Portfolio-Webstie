@@ -5,7 +5,7 @@ import { portfolioData } from '../portfolioData';
 
 const Education = () => {
   const { education } = portfolioData;
-  const { profileImg } = portfolioData.personalInfo;
+  const { aboutImg, profileImg } = portfolioData.personalInfo;
 
   return (
     <section id="education">
@@ -21,7 +21,7 @@ const Education = () => {
       </motion.div>
 
       <div className="qual-scene-grid">
-        {/* Left Column: Portrait image overlaid on red circular backdrop */}
+        {/* Left Column: Portrait image in clean editorial frame */}
         <motion.div 
           className="qual-image-badge-wrapper"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -29,14 +29,13 @@ const Education = () => {
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="qual-circle-red-bg"></div>
           <img
-            src={profileImg}
+            src={aboutImg || profileImg || "/about_portrait.jpg"}
             alt="Education portrait"
             className="qual-portrait-img"
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop';
+              e.target.src = '/about_portrait.jpg';
             }}
           />
         </motion.div>

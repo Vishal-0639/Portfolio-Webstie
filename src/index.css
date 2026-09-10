@@ -35,7 +35,7 @@
   --transition-slow: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   
   /* Spacing */
-  --container-width: 1080px;
+  --container-width: 1360px;
   --border-radius-lg: 24px;
   --border-radius-md: 14px;
   --border-radius-sm: 8px;
@@ -57,22 +57,14 @@ html {
 body {
   font-family: var(--font-sans);
   color: var(--text-main);
-  background: radial-gradient(circle at 50% 25%, #18080b 0%, #000000 65%);
+  background: #000000;
   min-height: 100vh;
-  padding: 3rem 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  margin: 0;
+  padding: 0;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-@media (max-width: 768px) {
-  body {
-    padding: 0;
-    background: var(--bg-outer);
-  }
+  overflow-x: hidden;
 }
 
 /* Scrollbar Styles */
@@ -98,24 +90,38 @@ body {
 /* Outer/Inner Layout Structure */
 #root {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  min-height: 100vh;
 }
 
 .page-wrapper {
   width: 100%;
-  max-width: var(--container-width);
+  max-width: 100%;
   background: transparent;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8rem;
+}
+
+main {
+  width: 100%;
+}
+
+section {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 6rem 2.5rem;
 }
 
 @media (max-width: 768px) {
-  .page-wrapper {
-    gap: 4rem;
+  section {
+    padding: 4rem 1.25rem;
   }
+}
+
+section#home {
+  max-width: 100%;
+  padding: 0;
 }
 
 /* Typography styling */

@@ -4,7 +4,9 @@ export const portfolioData = {
     role: "Computer Science Engineering Student & Software Developer",
     subtitle: "Computer Science Student & Software Developer",
     bio: "Pre-final-year CSE student at Sri Krishna College of Engineering and Technology, with hands-on experience in full-stack development using Java and Spring Boot, along with internships spanning frontend and full-stack roles.",
-    profileImg: "/profile.jpg",
+    heroBgImg: "/hero_portrait.jpg",
+    aboutImg: "/about_portrait.jpg",
+    profileImg: "/about_portrait.jpg",
     resumeUrl: "/resume.pdf",
   },
   socialLinks: {

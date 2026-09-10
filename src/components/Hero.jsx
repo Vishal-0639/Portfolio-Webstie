@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
 import { portfolioData } from '../portfolioData';
 
 const Hero = () => {
-  const { name, profileImg } = portfolioData.personalInfo;
+  const { name, heroBgImg } = portfolioData.personalInfo;
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -23,114 +23,82 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="hero-immersive-section">
-      {/* Ambient Large VD Logo Watermark in Background */}
+    <section id="home" className="hero-khaled-section">
+      {/* Ambient Large VD Logo Watermark Centered in Background */}
       <div className="hero-ambient-watermark">
         <img src="/logo.png" alt="" className="hero-watermark-img" aria-hidden="true" />
       </div>
 
-      <div className="hero-immersive-container">
-        {/* Left/Main Column: Impactful Statement & Bio */}
+      {/* Full Hero Atmospheric Background Image */}
+      <div className="hero-full-bg-container">
+        <img
+          src={heroBgImg || "/hero_portrait.jpg"}
+          alt={name}
+          className="hero-full-bg-img"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/hero_portrait.jpg';
+          }}
+        />
+        <div className="hero-full-bg-overlay"></div>
+      </div>
+
+      <div className="hero-khaled-container">
+        {/* Availability Status Badge Centered */}
         <motion.div 
-          className="hero-main-content"
-          initial={{ opacity: 0, y: 30 }}
+          className="hero-status-pill"
+          initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
-          {/* Availability Status Badge */}
+          <span className="status-indicator-dot"></span>
+          <span className="status-text">AVAILABLE FOR FULL-STACK & BACKEND ROLES</span>
+        </motion.div>
+
+        {/* Bottom Content Row: Left Big Headline + Right Bio & Action Links */}
+        <div className="hero-bottom-grid">
           <motion.div 
-            className="hero-status-pill"
-            initial={{ opacity: 0, x: -20 }}
+            className="hero-headline-col"
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="status-indicator-dot"></span>
-            <span className="status-text">AVAILABLE FOR FULL-STACK & BACKEND ROLES</span>
+            <h1 className="hero-statement-title">
+              Building backend systems that work <span className="title-italic-accent">under real-world pressure.</span>
+            </h1>
           </motion.div>
 
-          {/* Large Hero Headline */}
-          <motion.h1 
-            className="hero-statement-title"
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Building backend systems that scale <span className="title-italic-accent">under real-world pressure.</span>
-          </motion.h1>
-
-          {/* Subtitle Bio */}
-          <motion.p 
-            className="hero-statement-desc"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Pre-final-year Computer Science student at <strong>SKCET, Coimbatore</strong>. Specializing in <strong>Java, Spring Boot, React, and MySQL</strong>. I focus on clean API design, high-concurrency architecture, and algorithmic problem-solving.
-          </motion.p>
-
-          {/* Action Links */}
           <motion.div 
-            className="hero-action-links"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
+            className="hero-details-col"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           >
-            <button
-              onClick={() => scrollToSection('projects')}
-              className="hero-link-primary"
-              title="Explore featured projects"
-            >
-              <span>See selected work</span>
-              <ArrowDown size={15} />
-            </button>
+            <p className="hero-statement-desc">
+              Pre-final-year Computer Science student at <strong>SKCET, Coimbatore</strong>. Specializing in <strong>Java, Spring Boot, React, and MySQL</strong>. I architect resilient microservices, high-concurrency pipelines, and clean transactional APIs.
+            </p>
 
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="hero-link-secondary"
-              title="Get in touch"
-            >
-              <span>Let's talk</span>
-              <ArrowRight size={15} />
-            </button>
+            <div className="hero-action-links">
+              <button
+                onClick={() => scrollToSection('projects')}
+                className="hero-link-primary"
+                title="Explore featured projects"
+              >
+                <span>See selected work</span>
+                <ArrowDown size={14} />
+              </button>
+
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="hero-link-secondary"
+                title="Get in touch"
+              >
+                <span>Let's talk</span>
+                <ArrowRight size={14} />
+              </button>
+            </div>
           </motion.div>
-        </motion.div>
-
-        {/* Right Column: Large High-Resolution Portrait with Floating Badge */}
-        <motion.div 
-          className="hero-image-column"
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="hero-portrait-frame">
-            <div className="hero-portrait-gradient-overlay"></div>
-            <img
-              src={profileImg}
-              alt={name}
-              className="hero-main-photo"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop';
-              }}
-            />
-            {/* Floating Live Metric Card */}
-            <motion.div 
-              className="hero-live-metric-card"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="metric-icon-badge">
-                <Sparkles size={16} />
-              </div>
-              <div className="metric-details">
-                <span className="metric-number">150+ Solved</span>
-                <span className="metric-label">LeetCode &bull; DSA Mastery</span>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

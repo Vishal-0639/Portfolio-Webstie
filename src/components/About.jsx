@@ -5,7 +5,7 @@ import { portfolioData } from '../portfolioData';
 
 const About = () => {
   const { description, stats } = portfolioData.aboutMe;
-  const { name, resumeUrl, profileImg } = portfolioData.personalInfo;
+  const { name, resumeUrl, aboutImg, profileImg } = portfolioData.personalInfo;
 
   return (
     <section id="about">
@@ -40,7 +40,7 @@ const About = () => {
           </div>
         </motion.div>
 
-        {/* Right Column: Portrait image overlaid on red circular backdrop */}
+        {/* Right Column: Portrait image with clean editorial frame */}
         <motion.div 
           className="about-image-badge-wrapper"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -48,14 +48,13 @@ const About = () => {
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="about-circle-red-bg"></div>
           <img
-            src={profileImg}
+            src={aboutImg || profileImg || "/about_portrait.jpg"}
             alt={`${name} portrait`}
             className="about-portrait-img"
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop';
+              e.target.src = '/about_portrait.jpg';
             }}
           />
         </motion.div>
