@@ -5,10 +5,21 @@ const Preloader = ({ onComplete }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    // Safety fallback timer if video fails to autoplay
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.log("Autoplay check:", err);
+        });
+      }
+    }
+
+    // Safety fallback timer so user never gets stuck
     const fallbackTimer = setTimeout(() => {
       if (onComplete) onComplete();
-    }, 3200);
+    }, 4500);
 
     return () => clearTimeout(fallbackTimer);
   }, [onComplete]);
@@ -36,6 +47,7 @@ const Preloader = ({ onComplete }) => {
           playsInline
           preload="auto"
           onEnded={handleVideoEnded}
+          onError={() => onComplete && onComplete()}
         />
       </div>
 
