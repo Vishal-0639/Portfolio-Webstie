@@ -51,7 +51,7 @@ function App() {
 
       <CustomCursor />
       <Navbar />
-      <main style={{ display: 'flex', flexDirection: 'column', gap: '8rem', paddingBottom: '4rem' }}>
+      <main style={{ display: 'flex', flexDirection: 'column', gap: '7rem', paddingBottom: '0' }}>
         <Hero />
         <About />
         <Skills />

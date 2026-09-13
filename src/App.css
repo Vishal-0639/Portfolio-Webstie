@@ -1421,9 +1421,9 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 7rem 4.5rem;
-  gap: 2rem;
-  min-height: 60vh;
+  padding: 4rem 2rem 1.5rem;
+  gap: 1.75rem;
+  min-height: auto;
   justify-content: center;
   position: relative;
 }
@@ -1446,7 +1446,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .thankyou-title {
@@ -1467,6 +1467,9 @@
 }
 
 @media (max-width: 768px) {
+  .thankyou-section {
+    padding: 3rem 1.25rem 1rem;
+  }
   .thankyou-title {
     font-size: 5rem;
   }
@@ -1485,7 +1488,7 @@
 .thankyou-socials {
   display: flex;
   gap: 1.5rem;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .thankyou-social-btn {
@@ -1510,7 +1513,8 @@
 .thankyou-footer {
   font-size: 0.8rem;
   color: var(--text-light);
-  margin-top: 3rem;
+  margin-top: 1.75rem;
+  padding-bottom: 0.5rem;
   letter-spacing: 1px;
 }
 
