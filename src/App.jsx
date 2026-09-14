@@ -18,6 +18,14 @@ import './App.css';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
+  // Force scroll to top on initial page load / refresh
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   // Intersection Observer scroll trigger to set scene active classes
   useEffect(() => {
     const sections = document.querySelectorAll('section');
@@ -42,11 +50,16 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
+  const handlePreloaderComplete = () => {
+    setIsLoading(false);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  };
+
   return (
     <div className="page-wrapper">
       {/* Welcome Preloader Screen */}
       <AnimatePresence mode="wait">
-        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+        {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
       </AnimatePresence>
 
       <CustomCursor />
